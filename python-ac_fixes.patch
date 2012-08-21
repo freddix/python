@@ -1,0 +1,40 @@
+diff -Nur Python-2.5.2.orig/configure.in Python-2.5.2/configure.in
+--- Python-2.5.2.orig/configure.in	2008-02-13 19:17:17.000000000 +0000
++++ Python-2.5.2/configure.in	2008-02-26 09:43:17.000000000 +0000
+@@ -767,13 +767,13 @@
+ 	    if test "$Py_DEBUG" = 'true' ; then
+ 		# Optimization messes up debuggers, so turn it off for
+ 		# debug builds.
+-		OPT="-g -O0 -Wall $STRICT_PROTO"
++		OPT="-g $CPPFLAGS $CFLAGS -Wall $STRICT_PROTO"
+ 	    else
+-		OPT="-g $WRAP -O3 -Wall $STRICT_PROTO"
++		OPT="-g $WRAP $CPPFLAGS $CFLAGS -Wall $STRICT_PROTO"
+ 	    fi
+ 	    ;;
+ 	*)
+-	    OPT="-O3 -Wall $STRICT_PROTO"
++	    OPT="$CPPFLAGS $CFLAGS -Wall $STRICT_PROTO"
+ 	    ;;
+ 	esac
+ 	case $ac_sys_system in
+--- Python-2.7/Makefile.pre.in~	2010-04-12 02:10:46.000000000 +0200
++++ Python-2.7/Makefile.pre.in	2010-07-05 20:04:00.942224202 +0200
+@@ -831,7 +831,7 @@
+ 		fi; \
+ 	done
+ 	$(INSTALL_DATA) $(srcdir)/Misc/python.man \
+-		$(DESTDIR)$(MANDIR)/man1/python$(VERSION).1
++		$(DESTDIR)$(MANDIR)/man1/python.1
+ 
+ # Install the library
+ PLATDIR=	plat-$(MACHDEP)
+@@ -953,7 +953,7 @@
+ python-config: $(srcdir)/Misc/python-config.in
+ 	# Substitution happens here, as the completely-expanded BINDIR
+ 	# is not available in configure
+-	sed -e "s,@EXENAME@,$(BINDIR)/python$(VERSION)$(EXE)," < $(srcdir)/Misc/python-config.in >python-config
++	sed -e "s,@EXENAME@,$(BINDIR)/python$(EXE)," < $(srcdir)/Misc/python-config.in >python-config
+ 
+ # Install the include files
+ INCLDIRSTOMAKE=$(INCLUDEDIR) $(CONFINCLUDEDIR) $(INCLUDEPY) $(CONFINCLUDEPY)
