@@ -10,14 +10,13 @@
 %define		py_dyndir	%{py_libdir}/lib-dynload
 %define		py_incdir	%{_includedir}/python%{py_ver}
 %define		py_libdir	%{_libdir}/python%{py_ver}
-%define		py_scriptdir	%{_libdir}/python%{py_ver}
 %define		py_sitedir	%{py_libdir}/site-packages
 %define		py_ver		2.7
 
 Summary:	Very high level scripting language with X interface
 Name:		python
 Version:	%{py_ver}.3
-Release:	7.1
+Release:	11
 Epoch:		1
 License:	PSF
 Group:		Applications
@@ -30,6 +29,7 @@ Patch3:		%{name}-no-static-lib.patch
 Patch4:		%{name}-lib64.patch
 Patch5:		%{name}-lib64-regex.patch
 Patch6:		%{name}-lib64-sysconfig.patch
+Patch7:		%{name}-lib64-fix-for-test_install.patch
 URL:		http://www.python.org/
 BuildRequires:	autoconf
 BuildRequires:	bzip2-devel
@@ -130,9 +130,12 @@ Python development tools such as profilers and debugger.
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
+%if %{_lib} == "lib64"
 %patch4 -p1
 %patch5 -p1
 %patch6 -p1
+%patch7 -p1
+%endif
 
 sed -i -e 's#db_setup_debug = False#db_setup_debug = True#g' setup.py
 
@@ -182,7 +185,7 @@ install -d $RPM_BUILD_ROOT{%{_bindir},%{_libdir}} 	\
 ln -sf libpython%{py_ver}.so.1.0 $RPM_BUILD_ROOT%{_libdir}/libpython.so
 ln -sf libpython%{py_ver}.so.1.0 $RPM_BUILD_ROOT%{_libdir}/libpython%{py_ver}.so
 
-install Makefile.pre.in $RPM_BUILD_ROOT%{py_scriptdir}/config
+install Makefile.pre.in $RPM_BUILD_ROOT%{py_libdir}/config
 
 %{__rm} -r $RPM_BUILD_ROOT%{py_scriptdir}/test
 %{__rm} -r $RPM_BUILD_ROOT%{py_scriptdir}/bsddb/test
@@ -411,8 +414,8 @@ rm -rf $RPM_BUILD_ROOT
 %{py_scriptdir}/encodings/*.py[co]
 
 # required by sysconfig.py
-%dir %{py_scriptdir}/config
-%{py_scriptdir}/config/Makefile
+%dir %{py_libdir}/config
+%{py_libdir}/config/Makefile
 %dir %{py_incdir}
 %{py_incdir}/pyconfig.h
 
@@ -437,16 +440,16 @@ rm -rf $RPM_BUILD_ROOT
 %{_pkgconfigdir}/python2.pc
 %{_pkgconfigdir}/python-%{py_ver}.pc
 
-%dir %{py_scriptdir}/config
-%attr(755,root,root) %{py_scriptdir}/config/makesetup
-%attr(755,root,root) %{py_scriptdir}/config/install-sh
-%{py_scriptdir}/config/Makefile.pre.in
-%{py_scriptdir}/config/Setup
-%{py_scriptdir}/config/Setup.config
-%{py_scriptdir}/config/Setup.local
-%{py_scriptdir}/config/config.c
-%{py_scriptdir}/config/config.c.in
-%{py_scriptdir}/config/python.o
+%dir %{py_libdir}/config
+%attr(755,root,root) %{py_libdir}/config/makesetup
+%attr(755,root,root) %{py_libdir}/config/install-sh
+%{py_libdir}/config/Makefile.pre.in
+%{py_libdir}/config/Setup
+%{py_libdir}/config/Setup.config
+%{py_libdir}/config/Setup.local
+%{py_libdir}/config/config.c
+%{py_libdir}/config/config.c.in
+%{py_libdir}/config/python.o
 
 %files devel-src
 %defattr(644,root,root,755)
