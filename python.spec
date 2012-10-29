@@ -139,6 +139,10 @@ Python development tools such as profilers and debugger.
 
 sed -i -e 's#db_setup_debug = False#db_setup_debug = True#g' setup.py
 
+%if %{_lib} == "lib"
+sed -i -e 's#lib64#lib#g' setup.py
+%endif
+
 rm -r Modules/{expat,zlib,_ctypes/{darwin,libffi}*}
 
 %build
