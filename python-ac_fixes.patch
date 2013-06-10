@@ -1,35 +1,16 @@
-diff -Nur Python-2.5.2.orig/configure.in Python-2.5.2/configure.in
---- Python-2.5.2.orig/configure.in	2008-02-13 19:17:17.000000000 +0000
-+++ Python-2.5.2/configure.in	2008-02-26 09:43:17.000000000 +0000
-@@ -767,13 +767,13 @@
- 	    if test "$Py_DEBUG" = 'true' ; then
- 		# Optimization messes up debuggers, so turn it off for
- 		# debug builds.
--		OPT="-g -O0 -Wall $STRICT_PROTO"
-+		OPT="-g $CPPFLAGS $CFLAGS -Wall $STRICT_PROTO"
- 	    else
--		OPT="-g $WRAP -O3 -Wall $STRICT_PROTO"
-+		OPT="-g $WRAP $CPPFLAGS $CFLAGS -Wall $STRICT_PROTO"
- 	    fi
- 	    ;;
- 	*)
--	    OPT="-O3 -Wall $STRICT_PROTO"
-+	    OPT="$CPPFLAGS $CFLAGS -Wall $STRICT_PROTO"
- 	    ;;
- 	esac
- 	case $ac_sys_system in
---- Python-2.7/Makefile.pre.in~	2010-04-12 02:10:46.000000000 +0200
-+++ Python-2.7/Makefile.pre.in	2010-07-05 20:04:00.942224202 +0200
-@@ -831,7 +831,7 @@
+diff -aurN Python-2.7.5.orig/Makefile.pre.in Python-2.7.5/Makefile.pre.in
+--- Python-2.7.5.orig/Makefile.pre.in	2013-06-06 22:29:18.018459017 +0200
++++ Python-2.7.5/Makefile.pre.in	2013-06-06 22:35:27.309720690 +0200
+@@ -898,7 +898,7 @@
  		fi; \
  	done
  	$(INSTALL_DATA) $(srcdir)/Misc/python.man \
 -		$(DESTDIR)$(MANDIR)/man1/python$(VERSION).1
 +		$(DESTDIR)$(MANDIR)/man1/python.1
  
- # Install the library
- PLATDIR=	plat-$(MACHDEP)
-@@ -953,7 +953,7 @@
+ # Install the unversioned manual pages
+ maninstall:	altmaninstall
+@@ -1043,7 +1043,7 @@
  python-config: $(srcdir)/Misc/python-config.in
  	# Substitution happens here, as the completely-expanded BINDIR
  	# is not available in configure
@@ -38,3 +19,23 @@ diff -Nur Python-2.5.2.orig/configure.in Python-2.5.2/configure.in
  
  # Install the include files
  INCLDIRSTOMAKE=$(INCLUDEDIR) $(CONFINCLUDEDIR) $(INCLUDEPY) $(CONFINCLUDEPY)
+diff -aurN Python-2.7.5.orig/configure.ac Python-2.7.5/configure.ac
+--- Python-2.7.5.orig/configure.ac	2013-06-06 22:29:18.007458615 +0200
++++ Python-2.7.5/configure.ac	2013-06-06 22:34:08.539706629 +0200
+@@ -1066,13 +1066,13 @@
+ 	    if test "$Py_DEBUG" = 'true' ; then
+ 		# Optimization messes up debuggers, so turn it off for
+ 		# debug builds.
+-		OPT="-g -O0 -Wall $STRICT_PROTO"
++		OPT="$CPPFLAGS $CFLAGS -Wall $STRICT_PROTO"
+ 	    else
+-		OPT="-g $WRAP -O3 -Wall $STRICT_PROTO"
++		OPT="$WRAP $CPPFLAGS $CFLAGS -Wall $STRICT_PROTO"
+ 	    fi
+ 	    ;;
+ 	*)
+-	    OPT="-O3 -Wall $STRICT_PROTO"
++	    OPT="$CPPFLAGS $CFLAGS -Wall $STRICT_PROTO"
+ 	    ;;
+ 	esac
+ 	case $ac_sys_system in

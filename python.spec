@@ -15,13 +15,13 @@
 
 Summary:	Very high level scripting language with X interface
 Name:		python
-Version:	%{py_ver}.3
-Release:	11
+Version:	%{py_ver}.5
+Release:	1
 Epoch:		1
 License:	PSF
 Group:		Applications
 Source0:	http://www.python.org/ftp/python/%{version}/Python-%{version}.tar.bz2
-# Source0-md5:	c57477edd6d18bd9eeca2f21add73919
+# Source0-md5:	6334b666b7ff2038c761d7b27ba699c1
 Patch0:		%{name}-pythonpath.patch
 Patch1:		%{name}-ac_fixes.patch
 Patch2:		%{name}-cflags.patch
