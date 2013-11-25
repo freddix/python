@@ -15,13 +15,13 @@
 
 Summary:	Very high level scripting language with X interface
 Name:		python
-Version:	%{py_ver}.5
-Release:	1
+Version:	%{py_ver}.6
+Release:	2
 Epoch:		1
 License:	PSF
 Group:		Applications
-Source0:	http://www.python.org/ftp/python/%{version}/Python-%{version}.tar.bz2
-# Source0-md5:	6334b666b7ff2038c761d7b27ba699c1
+Source0:	http://www.python.org/ftp/python/%{version}/Python-%{version}.tar.xz
+# Source0-md5:	bcf93efa8eaf383c98ed3ce40b763497
 Patch0:		%{name}-pythonpath.patch
 Patch1:		%{name}-ac_fixes.patch
 Patch2:		%{name}-cflags.patch
@@ -137,13 +137,13 @@ Python development tools such as profilers and debugger.
 %patch7 -p1
 %endif
 
-sed -i -e 's#db_setup_debug = False#db_setup_debug = True#g' setup.py
+%{__sed} -i -e 's#db_setup_debug = False#db_setup_debug = True#g' setup.py
 
 %if %{_lib} == "lib"
-sed -i -e 's#lib64#lib#g' setup.py
+%{__sed} -i -e 's#lib64#lib#g' setup.py
 %endif
 
-rm -r Modules/{expat,zlib,_ctypes/{darwin,libffi}*}
+%{__rm} -r Modules/{expat,zlib,_ctypes/{darwin,libffi}*}
 
 %build
 %{__aclocal}
@@ -190,6 +190,7 @@ ln -sf libpython%{py_ver}.so.1.0 $RPM_BUILD_ROOT%{_libdir}/libpython.so
 ln -sf libpython%{py_ver}.so.1.0 $RPM_BUILD_ROOT%{_libdir}/libpython%{py_ver}.so
 
 install Makefile.pre.in $RPM_BUILD_ROOT%{py_libdir}/config
+install Misc/python.man $RPM_BUILD_ROOT%{_mandir}/man1/python%{py_ver}.1
 
 %{__rm} -r $RPM_BUILD_ROOT%{py_scriptdir}/test
 %{__rm} -r $RPM_BUILD_ROOT%{py_scriptdir}/bsddb/test
@@ -229,7 +230,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/python
 %attr(755,root,root) %{_bindir}/python2
 %attr(755,root,root) %{_bindir}/python%{py_ver}
-%{_mandir}/man1/python.1*
+%{_mandir}/man1/python*.1*
 
 %files modules
 %defattr(644,root,root,755)
