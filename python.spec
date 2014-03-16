@@ -16,7 +16,7 @@
 Summary:	Very high level scripting language with X interface
 Name:		python
 Version:	%{py_ver}.6
-Release:	2
+Release:	3
 Epoch:		1
 License:	PSF
 Group:		Applications
@@ -30,6 +30,7 @@ Patch4:		%{name}-lib64.patch
 Patch5:		%{name}-lib64-regex.patch
 Patch6:		%{name}-lib64-sysconfig.patch
 Patch7:		%{name}-lib64-fix-for-test_install.patch
+Patch8:		%{name}-CVE-2014-1912.patch
 URL:		http://www.python.org/
 BuildRequires:	autoconf
 BuildRequires:	bzip2-devel
@@ -136,6 +137,7 @@ Python development tools such as profilers and debugger.
 %patch6 -p1
 %patch7 -p1
 %endif
+%patch8 -p1
 
 %{__sed} -i -e 's#db_setup_debug = False#db_setup_debug = True#g' setup.py
 
