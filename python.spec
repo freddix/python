@@ -31,6 +31,10 @@ Patch5:		%{name}-lib64-regex.patch
 Patch6:		%{name}-lib64-sysconfig.patch
 Patch7:		%{name}-lib64-fix-for-test_install.patch
 Patch8:		%{name}-CVE-2014-1912.patch
+Patch9:		79b82ebc4fd1.patch
+Patch10:	5e42e5764ac6.patch
+Patch11:	0b5b0bfcc7b1.patch
+Patch12:	74c7a6fd8b45.patch
 URL:		http://www.python.org/
 BuildRequires:	autoconf
 BuildRequires:	bzip2-devel
@@ -138,6 +142,10 @@ Python development tools such as profilers and debugger.
 %patch7 -p1
 %endif
 %patch8 -p1
+%patch9 -p1
+%patch10 -p1
+%patch11 -p1
+%patch12 -p1
 
 %{__sed} -i -e 's#db_setup_debug = False#db_setup_debug = True#g' setup.py
 
