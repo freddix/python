@@ -1,3 +1,4 @@
+# based on PLD Linux spec git://git.pld-linux.org/packages/python.git
 %bcond_without	tests	# skip tests
 
 # tests which will not work on 64-bit platforms
@@ -15,13 +16,13 @@
 
 Summary:	Very high level scripting language with X interface
 Name:		python
-Version:	%{py_ver}.6
-Release:	3
+Version:	%{py_ver}.8
+Release:	2
 Epoch:		1
 License:	PSF
 Group:		Applications
 Source0:	http://www.python.org/ftp/python/%{version}/Python-%{version}.tar.xz
-# Source0-md5:	bcf93efa8eaf383c98ed3ce40b763497
+# Source0-md5:	d235bdfa75b8396942e360a70487ee00
 Patch0:		%{name}-pythonpath.patch
 Patch1:		%{name}-ac_fixes.patch
 Patch2:		%{name}-cflags.patch
@@ -30,11 +31,6 @@ Patch4:		%{name}-lib64.patch
 Patch5:		%{name}-lib64-regex.patch
 Patch6:		%{name}-lib64-sysconfig.patch
 Patch7:		%{name}-lib64-fix-for-test_install.patch
-Patch8:		%{name}-CVE-2014-1912.patch
-Patch9:		79b82ebc4fd1.patch
-Patch10:	5e42e5764ac6.patch
-Patch11:	0b5b0bfcc7b1.patch
-Patch12:	74c7a6fd8b45.patch
 URL:		http://www.python.org/
 BuildRequires:	autoconf
 BuildRequires:	bzip2-devel
@@ -141,11 +137,6 @@ Python development tools such as profilers and debugger.
 %patch6 -p1
 %patch7 -p1
 %endif
-%patch8 -p1
-%patch9 -p1
-%patch10 -p1
-%patch11 -p1
-%patch12 -p1
 
 %{__sed} -i -e 's#db_setup_debug = False#db_setup_debug = True#g' setup.py
 
@@ -158,11 +149,7 @@ Python development tools such as profilers and debugger.
 %build
 %{__aclocal}
 %{__autoconf}
-CPPFLAGS="-I/usr/include/ncursesw %{rpmcppflags}"
-export CPPFLAGS
 %configure \
-	ac_cv_posix_semaphores_enabled=yes	\
-	ac_cv_broken_sem_getvalue=no		\
 	--enable-ipv6				\
 	--enable-shared				\
 	--enable-unicode=ucs4			\

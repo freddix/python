@@ -147,52 +147,6 @@ diff -urN Python-2.7.org/Lib/cgi.py Python-2.7/Lib/cgi.py
  # intentionally NOT "/usr/bin/env python".  On many systems
  # (e.g. Solaris), /usr/local/bin is not in $PATH as passed to CGI
  # scripts, and /usr/local/bin is the default directory where Python is
-diff -urN Python-2.7.org/Mac/PythonLauncher/factorySettings.plist Python-2.7/Mac/PythonLauncher/factorySettings.plist
---- Python-2.7.org/Mac/PythonLauncher/factorySettings.plist	2004-07-16 14:34:23.000000000 +0200
-+++ Python-2.7/Mac/PythonLauncher/factorySettings.plist	2010-07-05 20:00:03.526197587 +0200
-@@ -10,7 +10,7 @@
-                 <false/>
-                 <key>interpreter_list</key>
-                 <array>
--                    <string>/usr/local/bin/pythonw</string>
-+                    <string>/usr/bin/pythonw</string>
-                     <string>/usr/bin/pythonw</string>
-                     <string>/sw/bin/pythonw</string>
-                 </array>
-@@ -35,8 +35,8 @@
-                 <false/>
-                 <key>interpreter_list</key>
-                 <array>
--                    <string>/usr/local/bin/pythonw</string>
--                    <string>/usr/local/bin/python</string>
-+                    <string>/usr/bin/pythonw</string>
-+                    <string>/usr/bin/python</string>
-                     <string>/usr/bin/pythonw</string>
-                     <string>/usr/bin/python</string>
-                     <string>/sw/bin/pythonw</string>
-@@ -63,8 +63,8 @@
-                 <false/>
-                 <key>interpreter_list</key>
-                 <array>
--                    <string>/usr/local/bin/pythonw</string>
--                    <string>/usr/local/bin/python</string>
-+                    <string>/usr/bin/pythonw</string>
-+                    <string>/usr/bin/python</string>
-                     <string>/usr/bin/pythonw</string>
-                     <string>/usr/bin/python</string>
-                     <string>/sw/bin/pythonw</string>
-diff -urN Python-2.7.org/Mac/README Python-2.7/Mac/README
---- Python-2.7.org/Mac/README	2010-04-30 17:11:22.000000000 +0200
-+++ Python-2.7/Mac/README	2010-07-05 20:00:03.529530323 +0200
-@@ -213,7 +213,7 @@
- to be supplied later. Some useful (but outdated) info can be found in
- Mac/Demo.
- 
--The commandline scripts /usr/local/bin/python and pythonw can be used to run
-+The commandline scripts /usr/bin/python and pythonw can be used to run
- non-GUI and GUI python scripts from the command line, respectively.
- 
- How do I create a binary distribution?
 diff -urN Python-2.7.org/Misc/HISTORY Python-2.7/Misc/HISTORY
 --- Python-2.7.org/Misc/HISTORY	2010-03-07 16:23:59.000000000 +0100
 +++ Python-2.7/Misc/HISTORY	2010-07-05 20:00:03.576196805 +0200
